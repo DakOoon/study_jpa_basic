@@ -1,6 +1,9 @@
 package jpabasic;
 
 import jakarta.persistence.*;
+import jpabasic.domain.Member;
+import jpabasic.domain.Order;
+import jpabasic.domain.RoleType;
 
 public class JpaMain {
 
@@ -12,13 +15,29 @@ public class JpaMain {
         tx.begin();
         try {
             Member member = new Member();
-            member.setId(1L);
             member.setName("hi");
-            em.persist(member);
+            member.setRoleType(RoleType.USER);
+//            em.persist(member); // cascade
+
+            Order order1 = new Order();
+//            order1.setMember(member);
+//            member.getOrderList().add(order1);
+            order1.changeMember(member);
+            em.persist(order1);
+            Order order2 = new Order();
+//            order2.setMember(member);
+//            member.getOrderList().add(order2);
+            order2.changeMember(member);
+            em.persist(order2);
+
+//            em.flush();
+//            em.clear();
+
+            Order findOrder = em.find(Order.class, 1L);
+            System.out.println(findOrder.getMember().getId() +" : "+ findOrder.getMember().getName());
 
             Member findMember = em.find(Member.class, 1L);
-            System.out.println(findMember.getId());
-            System.out.println(findMember.getName());
+            System.out.println(findMember.getOrderList().size());
 
             System.out.println("commit");
             tx.commit();

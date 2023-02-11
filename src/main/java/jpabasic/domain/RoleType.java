@@ -1,4 +1,4 @@
-package jpabasic;
+package jpabasic.domain;
 
 public enum RoleType {
     USER, ADMIN
