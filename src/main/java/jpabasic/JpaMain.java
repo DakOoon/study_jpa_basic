@@ -17,7 +17,7 @@ public class JpaMain {
             Member member = new Member();
             member.setName("hi");
             member.setRoleType(RoleType.USER);
-//            em.persist(member); // cascade
+            em.persist(member);
 
             Order order1 = new Order();
 //            order1.setMember(member);
