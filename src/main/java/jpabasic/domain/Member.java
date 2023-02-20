@@ -51,6 +51,17 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member") // readOnly
     private List<Order> orders = new ArrayList<>();
 
+    @Embedded
+    private Period workPeriod;
+
+    @Embedded
+    private Address homeAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "address",
+            joinColumns = @JoinColumn(name = "member_id"))
+    private List<Address> addressHistory = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
