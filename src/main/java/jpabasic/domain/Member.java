@@ -17,6 +17,10 @@ import java.util.List;
         sequenceName = "MEMBER_SEQ",
         initialValue = 1,
         allocationSize = 50)
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.name = :username"
+)
 public class Member extends BaseEntity {
 
     @Id
